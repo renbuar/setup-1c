@@ -12,7 +12,7 @@ read -p "Version: " VERSION
 export USERNAME
 export PASSWORD
 export VERSION
-#export VERSION=11.5-1.1C
+export VERSION=11.5-1.1C
 #export VERSION=10.10-1.1C
 #export VERSION=10.9-5.1C
 ./loadpg.sh
