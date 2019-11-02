@@ -9,35 +9,56 @@ https://github.com/Infactum/onec_dock
 ## Использование
 
 - Клонируем этот репозитарий
+
 $ git clone https://github.com/renbuar/setup-1c.git
+
 $ cd setup-1c
+
 $ sh download.sh
 
 Please enter https://releases.1c.ru/ credentials
+
 Login: vasya
+
 Password: pupkin
+
 Version: 8.3.15.1565
 
+
 Будут загружены в setup-1c/dist :
+
 client_8_3_15_1565.deb64.tar.gz
+
 deb64_8_3_15_1565.tar.gz
 
 
+
 $ sudo sh setup-1c.sh
+
 выполнена первоначальная установка сервера 1С на стандартные порты
 
 server1c-8.3.15.1565-ras.service          enabled
+
 server1c-8.3.15.1565.service              enabled
+
 sudo systemctl status server1c-8.3.15.1565.service
+
 sudo systemctl status server1c-8.3.15.1565-ras.service
 
 
+
 Для установки дополнительных серверов
+
 на нестанартные порты с шагом +200 (или +1000)
+
 $ nano setup-1c.sh
+
 Если нужно установить несколько серверов для одной платформы
+
 задать уникальное имя
+
 export SERVICENAME=obraz
+
 
 ```
 export FIRST=false #true первоначальная установка #false дополнительные установки
