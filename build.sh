@@ -75,8 +75,8 @@ then
     sudo  apt install xfonts-utils cabextract -y
     sudo apt install ttf-mscorefonts-installer -y
     if $CLIENT; then
-    sudo apt-get install xvfb dbus-x11
-    sudo apt install libwebkitgtk-3.0-0
+    sudo apt-get install xvfb dbus-x11 -y
+    sudo apt install libwebkitgtk-3.0-0 -y
     fi
     #$ sudo dpkg -i fonts-ttf-ms_1.0-eter4ubuntu_all.deb
     sudo fc-cache -fv
