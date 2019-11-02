@@ -29,10 +29,10 @@ sudo apt-get install postgresql-common  -y
 dpkg -l | grep postgres | awk -F' ' '{print $2}' | sudo xargs apt-mark hold
 sudo rm -rf  /tmp/post
 mkdir -p /tmp/post
-cp dist/postgresql_11.5_1.1C_amd64_deb.tar.bz2 /tmp/post/
+cp dist/postgresql_${VERSION//-/_}_amd64_deb.tar.bz2 /tmp/post/
 cd /tmp/post
-tar -xvf postgresql_11.5_1.1C_amd64_deb.tar.bz2
-cd postgresql-11.5-1.1C_amd64_deb
+tar -xvf postgresql_${VERSION//-/_}_amd64_deb.tar.bz2
+cd postgresql-${VERSION}_amd64_deb
 sudo dpkg -i *.deb
 dpkg -l | grep 11.5-1.1C | awk -F' ' '{print $2}' | sudo xargs apt-mark hold
 sudo pg_dropcluster --stop 11 main
