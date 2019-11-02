@@ -8,10 +8,16 @@ then
     exit 1
 fi
 
-if ! [ -f dist/server.tar.gz ]; then
+if ! [ -f dist/deb64_${VERSION//./_}.tar.gz ]; then
     echo "Нет файла для установки - выходим"
     exit 1
 fi
+
+if ! [ -f dist/client_${VERSION//./_}.deb64.tar.gz ]; then
+    echo "Нет файла для установки - выходим"
+    exit 1
+fi
+
 
 #sudo rm -rf  /opt/1C/v$VERSION/
 sudo rm -rf  /tmp/1ctmp
@@ -38,12 +44,17 @@ fi
 # Предполагаем что одна версия 1С от одного пользователя
 if ! [ -d /opt/1C/v$VERSION/ ]; then
     echo "папка /opt/1C/v$VERSION/ не существует - создаем"
-    cp dist/server.tar.gz /tmp/1ctmp
+    cp dist/deb64_${VERSION//./_}.tar.gz /tmp/1ctmp
+    cp dist/client_${VERSION//./_}.deb64.tar.gz /tmp/1ctmp
     cd /tmp/1ctmp
-    tar xvzf /tmp/1ctmp/server.tar.gz
+    tar xvzf /tmp/1ctmp/deb64_${VERSION//./_}.tar.gz
+    tar xvzf /tmp/1ctmp/client_${VERSION//./_}.deb64.tar.gz
     mkdir /tmp/1ctmp/tmp
     dpkg-deb -x /tmp/1ctmp/1c-enterprise83-common_*_amd64.deb /tmp/1ctmp/tmp
     dpkg-deb -x 1c-enterprise83-server_*_amd64.deb /tmp/1ctmp/tmp
+    if $CLIENT; then
+    dpkg-deb -x 1c-enterprise83-client_*_amd64.deb /tmp/1ctmp/tmp
+    fi
     sudo mkdir -p /opt/1C/
     sudo mv tmp/opt/1C/v8.3/ /opt/1C/v$VERSION/
     sudo chown -R $USR1CV8:$GROUP1CV8 /opt/1C
@@ -51,17 +62,22 @@ else
     echo "папка /opt/1C/v$VERSION/ существует - пропускаем"
 fi
 
+
 #sudo userdel usr1cv8
 #sudo groupdel grp1cv8
 
 #  Если первоначальная установка
-if [ "$FIRST" -eq 1 ]
+if $FIRST
 then
     echo первоначальная установка
     sudo apt install imagemagick -y
     sudo apt install libfreetype6 libgsf-1-common unixodbc glib2.0 -y
     sudo  apt install xfonts-utils cabextract -y
     sudo apt install ttf-mscorefonts-installer -y
+    if $CLIENT; then
+    sudo apt-get install xvfb dbus-x11
+    sudo apt install libwebkitgtk-3.0-0
+    fi
     #$ sudo dpkg -i fonts-ttf-ms_1.0-eter4ubuntu_all.deb
     sudo fc-cache -fv
     sudo  apt install -y libc6-i386
