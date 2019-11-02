@@ -74,3 +74,29 @@ export GROUP1CV8=grp1cv8
 export SERVICENAME=obraz
 
 
+Удаление:
+
+ 
+
+$ systemctl list-unit-files | grep server1c
+server1c-8.3.15.1700-ras.service           enabled
+server1c-8.3.15.1700.service               enabled
+$ sudo systemctl stop server1c-8.3.15.1700-ras.service
+$ sudo systemctl disable server1c-8.3.15.1700-ras.service
+$ sudo rm /etc/systemd/system/server1c-8.3.15.1700-ras.service
+$ sudo systemctl stop server1c-8.3.15.1700.service
+$ sudo systemctl disable server1c-8.3.15.1700.service
+$ sudo rm /etc/systemd/system/server1c-8.3.15.1700.service
+$ sudo systemctl daemon-reload
+$ sudo systemctl reset-failed
+
+$ sudo rm -Rf /opt/1C/v8.3.15.1700/
+
+sudo systemctl status server1c-8.3.15.1700.service
+sudo systemctl status server1c-8.3.15.1700-ras.service
+
+Проверка:
+ 
+
+$ time xvfb-run /opt/1C/v8.3.15.1700/x86_64/./1cv8 CREATEINFOBASE Srvr='"u1804";Ref="demo";DBMS="PostgreSQL";DBSrvr="u1804 port=5432";DB="demo";DBUID="postgres";DBPwd="pass";CrSQLDB="Y";SchJobDn="Y";' /Out "/home/user/log.txt" 
+
