@@ -46,6 +46,8 @@ if ! [ -d /opt/1C/v$VERSION/ ]; then
     echo "папка /opt/1C/v$VERSION/ не существует - создаем"
     cp dist/deb64_${VERSION//./_}.tar.gz /tmp/1ctmp
     cp dist/client_${VERSION//./_}.deb64.tar.gz /tmp/1ctmp
+    cp dist/haspd-modules_7.90-eter2ubuntu_amd64.deb /tmp/1ctmp
+    cp dist/haspd_7.90-eter2ubuntu_amd64.deb /tmp/1ctmp
     cd /tmp/1ctmp
     tar xvzf /tmp/1ctmp/deb64_${VERSION//./_}.tar.gz
     tar xvzf /tmp/1ctmp/client_${VERSION//./_}.deb64.tar.gz
@@ -82,8 +84,8 @@ then
     sudo fc-cache -fv
     sudo  apt install -y libc6-i386
     cd /tmp/1ctmp
-    wget http://download.etersoft.ru/pub/Etersoft/HASP/last/x86_64/Ubuntu/18.04/haspd-modules_7.90-eter2ubuntu_amd64.deb
-    wget http://download.etersoft.ru/pub/Etersoft/HASP/last/x86_64/Ubuntu/18.04/haspd_7.90-eter2ubuntu_amd64.deb
+    #wget http://download.etersoft.ru/pub/Etersoft/HASP/last/x86_64/Ubuntu/18.04/haspd-modules_7.90-eter2ubuntu_amd64.deb
+    #wget http://download.etersoft.ru/pub/Etersoft/HASP/last/x86_64/Ubuntu/18.04/haspd_7.90-eter2ubuntu_amd64.deb
     sudo dpkg -i haspd_7.90-eter2ubuntu_amd64.deb
     sudo dpkg -i haspd-modules_7.90-eter2ubuntu_amd64.deb
     #$ sudo apt-get install -f -y
