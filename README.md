@@ -100,3 +100,11 @@ sudo systemctl status server1c-8.3.15.1700-ras.service
 
 $ time xvfb-run /opt/1C/v8.3.15.1700/x86_64/./1cv8 CREATEINFOBASE Srvr='"u1804";Ref="demo";DBMS="PostgreSQL";DBSrvr="u1804 port=5432";DB="demo";DBUID="postgres";DBPwd="pass";CrSQLDB="Y";SchJobDn="Y";' /Out "/home/user/log.txt" 
 
+$ sudo rm -Rf setup-1c
+$ git clone https://github.com/renbuar/setup-1c.git
+$ cd setup-1c
+$ sh downloadpg.sh
+$ sudo sh setup_pg11_1c.sh
+$ sh download.sh
+$ sudo sh setup-1c.sh
+$ sudo sh setup-2c.sh 
